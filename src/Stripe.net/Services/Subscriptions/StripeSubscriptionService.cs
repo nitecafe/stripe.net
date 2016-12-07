@@ -125,5 +125,21 @@ namespace Stripe
                 cancellationToken)
             );
         }
-   }
+
+        public virtual async Task<IEnumerable<StripeSubscription>> ListAsync(string customerId, string stripeSubscriptionStatus, StripeListOptions listOptions = null, StripeRequestOptions requestOptions = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var url = Urls.AllSubscriptions + $"?customer={customerId}";
+
+            if (!string.IsNullOrEmpty(stripeSubscriptionStatus))
+            {
+                url = $"{url}&status={stripeSubscriptionStatus}";
+            }
+
+            return Mapper<StripeSubscription>.MapCollectionFromJson(
+                await Requestor.GetStringAsync(this.ApplyAllParameters(listOptions, url, true),
+                SetupRequestOptions(requestOptions),
+                cancellationToken)
+            );
+        }
+    }
 }

@@ -36,6 +36,8 @@
 
         public static string Subscriptions => BaseUrl + "/customers/{0}/subscriptions";
 
+        public static string AllSubscriptions => BaseUrl + "/subscriptions";
+
         public static string Transfers => BaseUrl + "/transfers";
 
         public static string ApplicationFees => BaseUrl + "/application_fees";
